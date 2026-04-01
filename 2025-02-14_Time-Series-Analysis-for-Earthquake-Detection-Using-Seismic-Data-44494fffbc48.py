@@ -49,9 +49,9 @@ st.filter("bandpass", freqmin=0.1, freqmax=10.0)
 # Plot the preprocessed data
 st.plot()
 
-1 Trace(s) in Stream:
-IU.ANMO.00.BHZ | 2025-02-12T00:00:00.019538Z - 2025-02-13T00:59:59.994538Z | 40.0 Hz, 3600000 samples
-Selection deleted
+# 1 Trace(s) in Stream:
+# IU.ANMO.00.BHZ | 2025-02-12T00:00:00.019538Z - 2025-02-13T00:59:59.994538Z | 40.0 Hz, 3600000 samples
+# Selection deleted
 
 # Select the first trace in the stream
 tr = st[0]
