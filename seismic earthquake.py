@@ -10,39 +10,22 @@ from obspy.signal.trigger import classic_sta_lta, trigger_onset
 
 def initialize_the_iris_client() -> None:
     client = Client("IRIS")
-
     start_time = UTCDateTime("2023-01-01T00:00:00")
-
     end_time = UTCDateTime("2023-01-01T01:00:00")
-
     network = "IU"
-
     station = "ANMO"
-
     location = "00"
-
     channel = "BHZ"
-
     st = client.get_waveforms(network, station, location, channel, start_time, end_time)
-
     print(st)
-
     st.remove_response(output="DISP")
-
     st.filter("bandpass", freqmin=0.1, freqmax=10.0)
-
     st.plot()
-
     tr = st[0]
-
     sta_lta = classic_sta_lta(tr.data, nsta=500, nlta=10000)
-
     trigger_on = 3.5
-
     trigger_off = 1.0
-
     onsets = trigger_onset(sta_lta, trigger_on, trigger_off)
-
     for onset in onsets:
         print(
             f"Event detected from {tr.stats.starttime + onset[0] / tr.stats.sampling_rate} to {tr.stats.starttime + onset[1] / tr.stats.sampling_rate}"
@@ -64,21 +47,13 @@ def initialize_the_iris_client() -> None:
 
 def initialize_the_iris_client_2() -> None:
     client = Client("IRIS")
-
     start_time = UTCDateTime("2025-02-12T00:00:00")
-
     end_time = UTCDateTime("2025-02-13T01:00:00")
-
     network = "IU"
-
     station = "ANMO"
-
     location = "00"
-
     channel = "BHZ"
-
     st = client.get_waveforms(network, station, location, channel, start_time, end_time)
-
     inventory = client.get_stations(
         network=network,
         station=station,
@@ -88,27 +63,18 @@ def initialize_the_iris_client_2() -> None:
         endtime=end_time,
         level="response",
     )
-
     print(st)
-
     st.remove_response(inventory=inventory, output="DISP")
-
     st.filter("bandpass", freqmin=0.1, freqmax=10.0)
-
     st.plot(outfile="waveform.png")
 
 
 def select_the_first_trace_in_the_stream() -> None:
     tr = st[0]
-
     sta_lta = classic_sta_lta(tr.data, nsta=500, nlta=10000)
-
     trigger_on = 3.5
-
     trigger_off = 1.0
-
     onsets = trigger_onset(sta_lta, trigger_on, trigger_off)
-
     for onset in onsets:
         print(
             f"Event detected from {tr.stats.starttime + onset[0] / tr.stats.sampling_rate} to {tr.stats.starttime + onset[1] / tr.stats.sampling_rate}"

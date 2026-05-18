@@ -1,6 +1,5 @@
 # Description: Short example for Time Series Analysis for Earthquake Detection Using Seismic Data.
 
-
 import logging
 
 import matplotlib.pyplot as plt
@@ -16,23 +15,18 @@ def main():
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     )
 
-
     # Initialize the IRIS client
     client = Client("IRIS")
-
     # Define the time range for data retrieval
     start_time = UTCDateTime("2025-01-01T00:00:00")
     end_time = UTCDateTime("2025-01-01T01:00:00")
-
     # Specify the seismic station parameters
     network = "IU"  # Network code
     station = "ANMO"  # Station code
     location = "00"  # Location code
     channel = "BHZ"  # Channel code
-
     # Retrieve the waveform data
     st = client.get_waveforms(network, station, location, channel, start_time, end_time)
-
     # Retrieve the station metadata (response information)
     inventory = client.get_stations(
         network=network,
@@ -43,23 +37,17 @@ def main():
         endtime=end_time,
         level="response",
     )
-
     # Print the retrieved data
     logger.info(st)
-
     # Remove the instrument response to obtain ground displacement
     st.remove_response(inventory=inventory, output="DISP")
-
     # Apply a bandpass filter to isolate frequencies of interest
     st.filter("bandpass", freqmin=0.1, freqmax=10.0)
-
     # Plot the preprocessed data
     st.plot()
-
     # 1 Trace(s) in Stream:
     # IU.ANMO.00.BHZ | 2025-02-12T00:00:00.019538Z - 2025-02-13T00:59:59.994538Z | 40.0 Hz, 3600000 samples
     # Selection deleted
-
     # Select the first trace in the stream
     tr = st[0]
     # Apply the STA/LTA algorithm
@@ -82,7 +70,9 @@ def main():
         event_trace = tr.slice(starttime=event_start, endtime=event_end)
         # Plot the event
         plt.figure()
-        plt.plot(event_trace.times("matplotlib"), event_trace.data, label="Detected Event")
+        plt.plot(
+            event_trace.times("matplotlib"), event_trace.data, label="Detected Event"
+        )
         plt.xlabel("Time")
         plt.ylabel("Displacement (m)")
         plt.legend()

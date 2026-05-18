@@ -3,6 +3,12 @@ name = "time-series-analysis-for-earthquake-detection-usin"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
+    "pydantic>=2.10.0",
+    "pytest>=8.0",
     "matplotlib>=3.10.9",
     "obspy>=1.5.0",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
