@@ -11,14 +11,7 @@ Let's explore techniques for detecting earthquakes using seismic data. We will u
 
 Seismic data is typically recorded as time series representing ground motion over time. These recordings are captured by seismometers and are measured along the East-West (E), North-South (N), and Vertical (Z) axes. Data is often sampled at rates ranging from 1 to 100 Hz.
 
-## About
 
-Place the code for this article in this repository.
-The original article export is saved as `article.md`.
-
-## Files
-
-Add your `.ipynb`, `.py`, `.yaml`, `.js`, `.ts`, or other project files here.
 
 ## Disclaimer
 
